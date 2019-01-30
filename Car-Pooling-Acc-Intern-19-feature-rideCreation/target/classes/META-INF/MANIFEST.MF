@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: car-pooling
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: Sai Deepa
+Implementation-Vendor-Id: com.accolite
+Build-Jdk: 1.8.0_201
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/car-pooling
+Created-By: Maven Integration for Eclipse
+
