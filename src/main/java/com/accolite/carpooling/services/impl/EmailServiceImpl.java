@@ -1,25 +1,20 @@
 package com.accolite.carpooling.services.impl;
 
-import java.io.File;
-
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.accolite.carpooling.services.interfaces.EmailService;
 
 @Service
-public class EmailServiceImpl implements EmailService {
+public class EmailServiceImpl implements EmailService{
 
 	@Autowired
 	public JavaMailSender emailSender;
-
+	
 	@Override
 	public void sendSimpleMessage(String to, String subject, String text) {
 
@@ -27,29 +22,35 @@ public class EmailServiceImpl implements EmailService {
 		message.setTo(to);
 		message.setSubject(subject);
 		message.setText(text);
-		System.out.println(emailSender);
 		emailSender.send(message);
 	}
-
-//	@Override
-//	public void sendMessageWithAttachment(String to, String subject, String text, String pathToAttachment) {
-//
-//		MimeMessage message = emailSender.createMimeMessage();
-//
-//		try {
-//			MimeMessageHelper helper = new MimeMessageHelper(message, true);
-//
-//			helper.setTo(to);
-//			helper.setSubject(subject);
-//			helper.setText(text); 
-//
-//			FileSystemResource file = new FileSystemResource(new File(pathToAttachment));
-//			helper.addAttachment("Invoice", file);
-//
-//			emailSender.send(message);
-//			
-//		} catch (MessagingException e) {
-//			System.out.println("Error while sending mail");
-//		}
-//	}
+	
+	@Override
+	public void passwordRecovery(String to, String subject, String text, String link) {
+		SimpleMailMessage message = new SimpleMailMessage();
+		message.setTo(to);
+		message.setSubject(subject);
+		message.setText("Hi user\n\n\n" + text +"\n\n\nVisit "+link);
+		emailSender.send(message);
+	}
+	
+	@Override
+	public void favouriteUserPost(String to, String subject, String text, String link) {
+		SimpleMailMessage message = new SimpleMailMessage();
+		message.setTo(to);
+		message.setSubject(subject);
+		message.setText("Hi user\n\n\n" + text +"\n\n\nVisit "+link);
+		emailSender.send(message);
+	}
+	
+	@Override
+	public void rideRequest(String to, String subject, String text, String link){
+		SimpleMailMessage message = new SimpleMailMessage();
+		message.setTo(to);
+		message.setSubject(subject);
+		message.setText("Hi user\n\n\n" + text +"\n\n\nVisit "+link);
+		emailSender.send(message);
+	}
+	
+	
 }

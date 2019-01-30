@@ -19,7 +19,7 @@ import com.accolite.carpooling.services.impl.VehicleServiceImpl;
 public class TestVehicleController {
 
 	@InjectMocks
-	VehicleController controller;
+	UserController controller;
 
 	@Mock
 	VehicleServiceImpl service;

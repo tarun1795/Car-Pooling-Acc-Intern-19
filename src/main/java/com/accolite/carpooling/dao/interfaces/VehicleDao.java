@@ -3,7 +3,7 @@ package com.accolite.carpooling.dao.interfaces;
 import java.util.List;
 import com.accolite.carpooling.models.Vehicle;
 
-public interface VehicleDAO {
+public interface VehicleDao {
 	
 	Vehicle getVehicle(int id);
 	

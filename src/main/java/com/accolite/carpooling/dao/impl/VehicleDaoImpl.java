@@ -8,14 +8,14 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import com.accolite.carpooling.constants.Query;
-import com.accolite.carpooling.dao.interfaces.VehicleDAO;
+import com.accolite.carpooling.dao.interfaces.VehicleDao;
 import com.accolite.carpooling.models.Vehicle;
 import com.accolite.carpooling.rowmappers.VehicleMapper;
 
 @Component
-public class VehicleDAOImpl implements VehicleDAO {
-
-	@Autowired
+public class VehicleDaoImpl implements VehicleDao {
+ 
+	@Autowired 
 	JdbcTemplate jdbcTemplate;
 
 	@Override
@@ -25,15 +25,16 @@ public class VehicleDAOImpl implements VehicleDAO {
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
-	}
+	} 
 
 	@Override
 	public List<Vehicle> getAllVehicles(int userId) {
 		return jdbcTemplate.query(Query.SQL_GET_VEHICLES, new Object[] { userId }, new VehicleMapper());
 	}
-
+ 
 	@Override
 	public boolean createVehicle(Vehicle vehicle) {
+		
 		return jdbcTemplate.update(Query.SQL_CREATE_VEHICLE, vehicle.getVehicleId(), vehicle.getRegNo(),
 				vehicle.getUserId(), vehicle.getNoOfSeats(), vehicle.getName()) > 0;
 	}
@@ -43,7 +44,7 @@ public class VehicleDAOImpl implements VehicleDAO {
 		return jdbcTemplate.update(Query.SQL_UPDATE_VEHICLE, vehicle.getVehicleId(), vehicle.getRegNo(),
 				vehicle.getUserId(), vehicle.getNoOfSeats(), vehicle.getName(), vehicle.getVehicleId()) > 0;
 	}
-
+ 
 	@Override
 	public boolean deleteVehicle(int id) {
 		return jdbcTemplate.update(Query.SQL_DELETE_VEHICLE, id) > 0;

@@ -11,7 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import com.accolite.carpooling.dao.interfaces.VehicleDAO;
+import com.accolite.carpooling.dao.interfaces.VehicleDao;
 import com.accolite.carpooling.models.Vehicle;
 import com.accolite.carpooling.services.impl.VehicleServiceImpl;
 
@@ -21,7 +21,7 @@ public class TestVehicleService {
 	VehicleServiceImpl service;
 
 	@Mock
-	VehicleDAO dao;
+	VehicleDao dao;
 
 	@Before
 	public void init() {

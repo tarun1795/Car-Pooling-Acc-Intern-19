@@ -15,7 +15,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
-import com.accolite.carpooling.dao.interfaces.VehicleDAO;
+import com.accolite.carpooling.dao.interfaces.VehicleDao;
 import com.accolite.carpooling.models.Vehicle;
 import com.accolite.carpooling.services.impl.EmailServiceImpl;
 import com.accolite.carpooling.services.impl.VehicleServiceImpl;

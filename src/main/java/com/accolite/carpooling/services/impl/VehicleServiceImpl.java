@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.accolite.carpooling.dao.interfaces.VehicleDAO;
+import com.accolite.carpooling.dao.interfaces.VehicleDao;
 import com.accolite.carpooling.models.Vehicle;
 import com.accolite.carpooling.services.interfaces.VehicleService;
 
@@ -13,7 +13,7 @@ import com.accolite.carpooling.services.interfaces.VehicleService;
 public class VehicleServiceImpl implements VehicleService{
 
 	@Autowired
-	VehicleDAO vehicleDAO;
+	VehicleDao vehicleDAO;
 	 
 	@Override
 	public Vehicle getVehicle(int id) {
