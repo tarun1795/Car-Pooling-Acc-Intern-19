@@ -7,6 +7,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import com.accolite.carpooling.config.AppConfig;
 import com.accolite.carpooling.dao.impl.VehicleDAOImpl;
 import com.accolite.carpooling.dao.interfaces.VehicleDAO;
+import com.accolite.carpooling.services.impl.EmailServiceImpl;
 
 @SpringBootApplication
 public class CarPoolingApplication {

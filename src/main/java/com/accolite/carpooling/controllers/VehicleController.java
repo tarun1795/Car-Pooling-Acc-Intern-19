@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accolite.carpooling.models.Vehicle;
+import com.accolite.carpooling.services.interfaces.EmailService;
 import com.accolite.carpooling.services.interfaces.VehicleService;
 
 @RestController
@@ -27,11 +28,14 @@ public class VehicleController {
 	@Autowired
 	VehicleService vehicleService;
 	
+	@Autowired
+	EmailService emailService;
+	
 	@RequestMapping(value = "/{id}", method=RequestMethod.GET)
 	public ResponseEntity<?> getVehicle(@PathVariable("id")int id)
 	{
 		Vehicle vehicle = vehicleService.getVehicle(id);
-		if(vehicle != null)
+		if(vehicle != null) 
 			return new ResponseEntity<Vehicle>(vehicle,HttpStatus.OK);
 		else
 			return new ResponseEntity<String>("No vehicle with the id found",HttpStatus.BAD_REQUEST); 
@@ -40,8 +44,10 @@ public class VehicleController {
 	
 	
 	@RequestMapping(value = "/all/{id}", method=RequestMethod.GET)
-	public ResponseEntity<?> getVehicles(@PathVariable("id")int userId)
+	public ResponseEntity<?> getAllVehicles(@PathVariable("id")int userId)
 	{
+		
+		// emailService.sendSimpleMessage("abhinav071197@gmail.com", "test", "hey");
 		List<Vehicle> vehicles = vehicleService.getAllVehicles(userId);
 		if(vehicles != null)
 			return new ResponseEntity<List<Vehicle>>(vehicles,HttpStatus.OK);
