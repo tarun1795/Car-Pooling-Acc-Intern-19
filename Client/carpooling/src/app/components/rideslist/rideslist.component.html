@@ -1,0 +1,19 @@
+<div class ="rides-container" *ngFor="let i of rides">
+  <mat-card class="card-body">
+    <mat-card-header>
+      <mat-card-title>Madhukar Domakonda</mat-card-title>
+      <mat-card-subtitle>
+        source - destination
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="card-content">
+        <div>
+          <div><label for="">Created Time : 11:40 AM</label>  available upto: 2:00 PM</div>
+          <div><label for="">Seats Available:{{seats_available}}</label> </div>
+        </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button (click)="onBooking(1)" mat-button color="primary">Book</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

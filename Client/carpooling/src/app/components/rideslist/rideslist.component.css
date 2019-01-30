@@ -1,0 +1,13 @@
+.card-body {
+    max-width:60%;
+  }
+.card-button{
+    align:right;
+}
+.card-content{
+    margin-left:10px;
+}
+.rides-container{
+    margin-top:10px;
+
+}
