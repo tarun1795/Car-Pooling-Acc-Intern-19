@@ -10,7 +10,7 @@ import com.accolite.carpooling.dao.interfaces.VehicleDao;
 import com.accolite.carpooling.models.Ride;
 import com.accolite.carpooling.models.Vehicle;
 import com.accolite.carpooling.services.interfaces.RideService;
-import com.acoolite.carpooling.dto.RideDetailDto;
+import com.accolite.carpooling.dto.RideDetailDto;
 
 @Service
 public class RideServiceImpl implements RideService{

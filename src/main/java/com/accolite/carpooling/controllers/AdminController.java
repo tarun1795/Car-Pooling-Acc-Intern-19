@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.accolite.carpooling.models.Ride;
 import com.accolite.carpooling.services.interfaces.RideService;
-import com.acoolite.carpooling.dto.RideDetailDto;
+import com.accolite.carpooling.dto.RideDetailDto;
 
 @RestController
 @CrossOrigin(origins="http://localhost:4200")

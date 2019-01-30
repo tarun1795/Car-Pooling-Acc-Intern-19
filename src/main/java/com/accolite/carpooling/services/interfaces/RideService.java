@@ -4,7 +4,7 @@ package com.accolite.carpooling.services.interfaces;
 import java.util.List;
 
 import com.accolite.carpooling.models.Ride;
-import com.acoolite.carpooling.dto.RideDetailDto;
+import com.accolite.carpooling.dto.RideDetailDto;
 
 public interface RideService {
 	public List<RideDetailDto> getAllRides();
