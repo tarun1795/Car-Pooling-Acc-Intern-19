@@ -9,13 +9,18 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-
+/*
+ * Configuration class for the project
+ */
 @Configuration
 @EnableWebMvc
 @EnableAutoConfiguration
 public class AppConfig {
 
 
+	/*
+	 * bean for mail sender
+	 */
 	@Bean
 	public JavaMailSenderImpl getJavaMailSender() {
 	    JavaMailSenderImpl mailSender = new JavaMailSenderImpl();

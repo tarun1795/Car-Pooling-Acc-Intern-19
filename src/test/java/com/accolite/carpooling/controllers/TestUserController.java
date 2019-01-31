@@ -16,7 +16,7 @@ import org.springframework.http.ResponseEntity;
 import com.accolite.carpooling.models.Vehicle;
 import com.accolite.carpooling.services.impl.VehicleServiceImpl;
 
-public class TestVehicleController {
+public class TestUserController {
 
 	@InjectMocks
 	UserController controller;

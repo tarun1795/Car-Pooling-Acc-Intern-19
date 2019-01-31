@@ -22,6 +22,9 @@ import com.accolite.carpooling.services.interfaces.RideService;
 import com.accolite.carpooling.services.interfaces.UserService;
 import com.accolite.carpooling.services.interfaces.VehicleService;
 
+/*
+ * A controller for the ride related operations
+ */
 @RestController
 @EnableAutoConfiguration
 //remove this during final build
@@ -37,6 +40,9 @@ public class RideController {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
+	/*
+	 * method is used for sending a ride request to driver
+	 */
 	@RequestMapping(value = "/{rideId}/request/{requestUserId}", method = RequestMethod.GET)
 	public ResponseEntity<?> requestForRide(@PathVariable("rideId") int rideId,
 			@PathVariable("requestUserId") int requestUserId, @RequestBody int noOfSeatsRequired) {
@@ -46,12 +52,15 @@ public class RideController {
 			return new ResponseEntity<String>("request sent", HttpStatus.OK);
 
 		} catch (Exception e) {
-			e.printStackTrace();
-			return new ResponseEntity<Exception>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+//			e.printStackTrace();
+			return new ResponseEntity<String>("request not sent", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 	}
 
+	/*
+	 * method is used to respond to request from a rider
+	 */
 	@RequestMapping(value = "/{rideId}/response/{requestUserId}/{status}", method = RequestMethod.GET)
 	public ResponseEntity<?> responseForRide(@PathVariable("rideId") int rideId,
 			@PathVariable("requestUserId") int requestUserId, @PathVariable("status") String status) {
@@ -61,8 +70,7 @@ public class RideController {
 			return new ResponseEntity<String>("response sent", HttpStatus.OK);
 
 		} catch (Exception e) {
-			e.printStackTrace();
-			return new ResponseEntity<Exception>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<String>("response not sent", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
 	}
