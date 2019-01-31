@@ -19,6 +19,11 @@ public class EmailServiceImpl implements EmailService{
 	@Autowired
 	WalletHistoryDAO walletHistoryDAO;
 	
+	/*
+	 * (non-Javadoc)
+	 * @see com.accolite.carpooling.services.interfaces.EmailService#sendSimpleMessage(java.lang.String, java.lang.String, java.lang.String)
+	 */
+	
 	@Override
 	public void sendSimpleMessage(String to, String subject, String text) {
 
@@ -29,6 +34,10 @@ public class EmailServiceImpl implements EmailService{
 		emailSender.send(message);
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see com.accolite.carpooling.services.interfaces.EmailService#passwordRecovery(java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+	 */
 	@Override
 	public void passwordRecovery(String to, String subject, String text, String link) {
 		SimpleMailMessage message = new SimpleMailMessage();
@@ -38,15 +47,10 @@ public class EmailServiceImpl implements EmailService{
 		emailSender.send(message);
 	}
 	
-	@Override
-	public void favouriteUserPost(String to, String subject, String text, String link) {
-		SimpleMailMessage message = new SimpleMailMessage();
-		message.setTo(to);
-		message.setSubject(subject);
-		message.setText("Hi user\n\n\n" + text +"\n\n\nVisit "+link);
-		emailSender.send(message);
-	}
-	
+	/*
+	 * (non-Javadoc)
+	 * @see com.accolite.carpooling.services.interfaces.EmailService#rideRequest(java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+	 */
 	@Override
 	public void rideRequest(String to, String subject, String text, String link){
 		SimpleMailMessage message = new SimpleMailMessage();
@@ -56,6 +60,10 @@ public class EmailServiceImpl implements EmailService{
 		emailSender.send(message);
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see com.accolite.carpooling.services.interfaces.EmailService#invoice(java.lang.String, java.lang.String, java.lang.String)
+	 */
 	@Override
 	public void invoice(String to, String subject, String text){
 		List<WalletHistory> lwh = walletHistoryDAO.getAllHistoryDetails();

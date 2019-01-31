@@ -14,20 +14,21 @@ public class WalletServiceImpl implements WalletService{
 	@Autowired
 	WalletMoneyDAO walletMoneyImplDAO;
 	
-	public WalletServiceImpl() {
-	
-	}
-	
 	@Override
-	public void addMoney(int amt, int w_id, int u_id, Date date) {
-		boolean result = walletMoneyImplDAO.AddMoney(amt, w_id, u_id, date);
+	public int addMoney(int amt, int w_id, int u_id, Date date) {
+		int result = walletMoneyImplDAO.AddMoney(amt, w_id, u_id, date);
 		System.out.println(result);
+		return result;
 	}
 	
 	@Override
 	public void transferMoney(int amt, int sw_id, int dw_id,int r_id, int u_id, Date date) {
-		boolean result = walletMoneyImplDAO.TransferMoney(amt, sw_id, dw_id,r_id, u_id, date);
-		System.out.println(result);
+		System.out.println(walletMoneyImplDAO.TransferMoney(amt, sw_id, dw_id,r_id, u_id, date));
+	}
+	
+	@Override
+	public int getMoney(int w_id) {
+		return walletMoneyImplDAO.GetMoney(w_id);
 	}
 
 }

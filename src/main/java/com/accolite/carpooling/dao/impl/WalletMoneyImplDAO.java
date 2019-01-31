@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.accolite.carpooling.constants.Query;
 import com.accolite.carpooling.dao.interfaces.WalletMoneyDAO;
 import com.accolite.carpooling.models.WalletMoney;
+import com.accolite.carpooling.rowmappers.GetMoneyMapper;
 import com.accolite.carpooling.rowmappers.WalletMoneyMapper;
 
 @Repository
@@ -20,11 +21,15 @@ public class WalletMoneyImplDAO implements WalletMoneyDAO {
 	private WalletMoney walletMoney;
 	
 	@Override
-	public boolean AddMoney(int amt, int w_id, int u_id, Date date) {
+	public int AddMoney(int amt, int w_id, int u_id, Date date) {
 		int ans = jdbcTemplate.update(Query.SQL_TRANSFER_MONEY_HISTORY, -1, u_id, amt, date, "Money Added to your wallet");
 		System.out.println(ans);
 		walletMoney = jdbcTemplate.queryForObject(Query.SQL_GET_WALLET_DETAILS, new Object[] { w_id },new WalletMoneyMapper());
-		return jdbcTemplate.update(Query.SQL_ADD_MONEY, walletMoney.getAmt()+amt, walletMoney.getW_id())>0;
+		boolean res = jdbcTemplate.update(Query.SQL_ADD_MONEY, walletMoney.getAmt()+amt, walletMoney.getW_id())>0;
+		if(res == true) {
+			walletMoney = jdbcTemplate.queryForObject(Query.SQL_GET_WALLET_DETAILS, new Object[] { w_id },new WalletMoneyMapper());
+		}
+		return walletMoney.getAmt();
 	}
 	
 	@Override
@@ -36,6 +41,12 @@ public class WalletMoneyImplDAO implements WalletMoneyDAO {
 		walletMoney = jdbcTemplate.queryForObject(Query.SQL_GET_WALLET_DETAILS, new Object[] { dw_id },new WalletMoneyMapper());
 		boolean b = jdbcTemplate.update(Query.SQL_TRANSFER_MONEY, (walletMoney.getAmt()+ride_amt), dw_id)>0;
 		return a&&b;
+	}
+	
+	@Override
+	public int GetMoney(int w_id) {
+		walletMoney = jdbcTemplate.queryForObject(Query.SQL_GET_MONEY, new Object[] { w_id }, new GetMoneyMapper());
+		return walletMoney.getAmt();
 	}
 	
 }

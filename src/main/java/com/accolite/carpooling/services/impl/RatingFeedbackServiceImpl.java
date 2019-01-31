@@ -16,5 +16,11 @@ public class RatingFeedbackServiceImpl implements RatingFeedbackService {
 	public int getRatingUser(int u_id) {
 		return ratingUserDAO.getRating(u_id);
 	}
+	
+	@Override
+	public void insertRatingUser(int u_id, int rating, String feedback) {
+		boolean a = ratingUserDAO.insertRatingFeedback(u_id, rating, feedback);
+		System.out.println(a);
+	}
 
 }
