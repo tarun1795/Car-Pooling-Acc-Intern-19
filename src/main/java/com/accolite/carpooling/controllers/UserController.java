@@ -22,7 +22,7 @@ import com.accolite.carpooling.services.interfaces.EmailService;
 import com.accolite.carpooling.services.interfaces.UserService;
 import com.accolite.carpooling.services.interfaces.VehicleService;
 
-/*
+/**
  * A controller for User related operations
  */
 @RestController
@@ -44,8 +44,10 @@ public class UserController {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
-	/*
-	 * method for getting a single user based on his id
+	/**
+	 *  method for getting a single user based on his id
+	 * @param id user id
+	 * @return user if exist else "no user with id found"
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getUser(@PathVariable("id") int id) {
@@ -56,8 +58,10 @@ public class UserController {
 			return new ResponseEntity<String>("No user with the id found", HttpStatus.BAD_REQUEST);
 	}
 
-	/*
+	/**
 	 * method for getting user and his vehicles together
+	 * @param id user id
+	 * @return user details along with vehicles
 	 */
 	@RequestMapping(value = "/details/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getUserDetails(@PathVariable("id") int id) {
@@ -71,8 +75,10 @@ public class UserController {
 		}
 	}
 
-	/*
+	/**
 	 * method for updating user and his vehicles together
+	 * @param userDetails user details object
+	 * @return if found "user details updated" else "user details not found"
 	 */
 	@RequestMapping(value = "/details/{id}", method = RequestMethod.POST)
 	public ResponseEntity<?> updateUserDetails(@RequestBody UserDetailDto userDetails) {
@@ -86,8 +92,9 @@ public class UserController {
 
 	
 
-	/*
+	/**
 	 * method is used to get all the users info
+	 * @return ResponseEntity
 	 */
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public ResponseEntity<?> getUsers() {
@@ -98,8 +105,11 @@ public class UserController {
 			return new ResponseEntity<String>("No users found", HttpStatus.BAD_REQUEST);
 	}
 
-	/*
+	/**
 	 * method is used for updating user based on id
+	 * @param user user object
+	 * @param userId user id
+	 * @return ResponseEntity "user updated" or "user is not updated"
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
 	public ResponseEntity<?> updateUser(@RequestBody User user, @PathVariable("id") int userId) {
@@ -110,8 +120,10 @@ public class UserController {
 			return new ResponseEntity<String>("user is not updated", HttpStatus.BAD_REQUEST);
 	}
 
-	/*
+	/**
 	 * method is used for deleting a user based on his id
+	 * @param id user id
+	 * @return ResponseEntity "user deleted" or "user is not deleted"
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> deleteUser(@PathVariable("id") int id) {
@@ -121,8 +133,10 @@ public class UserController {
 			return new ResponseEntity<String>("user is not deleted", HttpStatus.BAD_REQUEST);
 	}
 
-	/*
+	/**
 	 * method is used to login a user
+	 * @param user user object
+	 * @return ResponseEntity "logged in" or "not logged in"
 	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ResponseEntity<?> login(@RequestBody LoginDto user) {
@@ -132,13 +146,16 @@ public class UserController {
 			return new ResponseEntity<String>("unable to login", HttpStatus.BAD_REQUEST);
 	}
 
-	/*
+	/**
 	 * method is used to signup a new user
+	 * @param user user object
+	 * @return ResponseEntity "user added" or "user not added"
 	 */
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
 	public ResponseEntity<?> signup(@RequestBody User user) {
 		
-		int walletId = jdbcTemplate.queryForObject("select MAX(w_id)+1 from carpooling.wallet", Integer.class);
+		int walletId = jdbcTemplate.queryForObject("select MAX(w_id) from carpooling.wallet", Integer.class);
+		walletId++;
 		user.setWalletId(walletId);
 		if (userService.addUser(user))
 			return new ResponseEntity<String>("user added", HttpStatus.OK);
@@ -146,8 +163,10 @@ public class UserController {
 			return new ResponseEntity<String>("user not added", HttpStatus.BAD_REQUEST);
 	}
 
-	/*
+	/**
 	 * method is used to get a vehicle by its id
+	 * @param id vehicle id
+	 * @return ResponseEntity vehicle or "No vehicle with id found"
 	 */
 	@RequestMapping(value = "vehicle/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getVehicle(@PathVariable("id") int id) {
@@ -158,8 +177,10 @@ public class UserController {
 			return new ResponseEntity<String>("No vehicle with the id found", HttpStatus.BAD_REQUEST);
 	}
 
-	/*
+	/**
 	 * method is used to get all vehicles related to a particular user
+	 * @param userId user id
+	 * @return ResponseEntity vehicles or "no vehicles found"
 	 */
 	@RequestMapping(value = "vehicle/all/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> getAllVehicles(@PathVariable("id") int userId) {
@@ -171,8 +192,10 @@ public class UserController {
 			return new ResponseEntity<String>("No vehicles found", HttpStatus.BAD_REQUEST);
 	}
 
-	/*
+	/**
 	 * method is used to create a new vehicle
+	 * @param vehicle vehicle object
+	 * @return "vehicle added or vehicle not added"
 	 */
 	@RequestMapping(value = "vehicle/", method = RequestMethod.POST)
 	public ResponseEntity<?> createVehicle(@RequestBody Vehicle vehicle) {
@@ -182,8 +205,10 @@ public class UserController {
 			return new ResponseEntity<String>("vehicle is not added", HttpStatus.BAD_REQUEST);
 	}
 
-	/*
+	/**
 	 * method is used to update the vehicle
+	 * @param vehicle vehicle object
+	 * @return
 	 */
 	@RequestMapping(value = "vehicle/{id}", method = RequestMethod.POST)
 	public ResponseEntity<?> updateVehicle(@RequestBody Vehicle vehicle) {
@@ -193,8 +218,10 @@ public class UserController {
 			return new ResponseEntity<String>("vehicle is not updated", HttpStatus.BAD_REQUEST);
 	}
 
-	/*
+	/**
 	 * method is used to delete a vehicle
+	 * @param id vehicle id
+	 * @return
 	 */
 	@RequestMapping(value = "vehicle/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<?> deleteVehicle(@PathVariable("id") int id) {

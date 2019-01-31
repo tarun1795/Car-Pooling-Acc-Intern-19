@@ -7,6 +7,10 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.accolite.carpooling.models.WalletMoney;
 
+/**
+ * row mapper for wallet
+ *
+ */
 public class GetMoneyMapper implements RowMapper<WalletMoney> {
 
 	public WalletMoney mapRow(ResultSet resultSet, int i) throws SQLException{

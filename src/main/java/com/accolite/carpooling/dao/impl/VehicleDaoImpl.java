@@ -1,7 +1,6 @@
 package com.accolite.carpooling.dao.impl;
 
 import java.util.List;
-import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -48,6 +47,11 @@ public class VehicleDaoImpl implements VehicleDao {
 	@Override
 	public boolean deleteVehicle(int id) {
 		return jdbcTemplate.update(Query.SQL_DELETE_VEHICLE, id) > 0;
+	}
+
+	@Override
+	public List<Vehicle> getAllVehicles() {
+		return jdbcTemplate.query(Query.GET_ALL_VEHICLES, new VehicleMapper());
 	}
 
 }

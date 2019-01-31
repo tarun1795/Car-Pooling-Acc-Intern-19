@@ -6,6 +6,11 @@ import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.accolite.carpooling.models.*;
+
+/**
+ * row mapper for wallethistory
+ *
+ */
 public class WalletHistoryMapper  implements RowMapper<WalletHistory> {
 	
 	

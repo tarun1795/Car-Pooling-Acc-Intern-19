@@ -4,6 +4,10 @@ import java.util.List;
 
 import com.accolite.carpooling.models.*;
 
+/**
+ *	used for getting User and his associated Vehicles together 
+ *
+ */
 public class UserDetailDto {
 
 	User user;

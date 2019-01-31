@@ -2,8 +2,6 @@ package com.accolite.carpooling.services.impl;
 
 import com.accolite.carpooling.services.interfaces.UserService;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
-
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

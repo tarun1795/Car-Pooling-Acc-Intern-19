@@ -1,5 +1,9 @@
 package com.accolite.carpooling.models;
 
+/**
+ * user table object
+ *
+ */
 public class User {
 
 	private int userId;
@@ -63,8 +67,10 @@ public class User {
 		this.walletId = walletId;
 	}
 
+	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", userName =  " + userName + "email = ] " + email + "";
+		return "User [userId=" + userId + ", userName=" + userName + ", password=" + password + ", email=" + email
+				+ ", walletId=" + walletId + "]";
 	}
 
 }

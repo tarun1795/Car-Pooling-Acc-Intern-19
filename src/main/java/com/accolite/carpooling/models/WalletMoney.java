@@ -1,5 +1,10 @@
 package com.accolite.carpooling.models;
 
+
+/**
+ * Wallet table related object 
+ *
+ */
 public class WalletMoney {
 
 	private int amt;

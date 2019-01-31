@@ -7,6 +7,10 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.accolite.carpooling.models.User;
 
+/**
+ * row mapper for user
+ *
+ */
 public class UserMapper implements RowMapper<User> {
 
 	@Override
@@ -17,7 +21,7 @@ public class UserMapper implements RowMapper<User> {
 			user.setUserName(rs.getString("user_name"));
 			user.setPassword(rs.getString("password"));
 			user.setEmail(rs.getString("email"));
-
+			user.setWalletId(rs.getInt("w_id"));
 			return user;
 		
 	}

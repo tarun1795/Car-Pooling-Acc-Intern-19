@@ -1,6 +1,8 @@
 package com.accolite.carpooling.constants;
 
-/*
+
+/**
+ * @author Abhinav
  * A Holder for all the query constants
  */
 public class Query {
@@ -46,14 +48,19 @@ public class Query {
 	public static final String GET_ALL_RIDES = "select * from ride r inner join vehicle v where r.v_id = v.v_id";
 	public static final String GET_RIDE = "select * from ride r inner join vehicle v where r.v_id = v.v_id and r_id = :id";
 	public static final String CREATE_RIDE = "insert into ride values(:id,:driver_id,:v_id,:source,:destination,:ride_date,:created_date,:cost)";
+	public static final String DELETE_RIDE = "delete from ride where r_id=:id";
+	public static final String UPDATE_RIDE_SEATS = "Update ride set seats_available = :seats where r_id=:id";
+	public static final String GET_ALL_RIDES_TO_DEST = "select * from ride where destination=:dest";
+	public static final String GET_ALL_RIDES_FROM_SRC = "select * from ride where source = :src";
+	public static final String GET_ALL_RIDES_FROM_SRC_TO_DEST = "select * from ride where destination=:dest and source=:src";
 	
 	
 	/*
 	 *  user module queries
 	 */
 	public static final String SQL_GET_USER_BY_ID = "select u_id, email, password,w_id, user_name from carpooling.user where u_id = ?";
-	public static final String SQL_GET_USERS = "select * from carpooling.user";
-	public static final String SQL_CREATE_USER = "insert into carpooling.user values(?, ?, sha(?), ?, ?);";
+	public static final String SQL_GET_USERS = "select u_id, email, password,w_id, user_name from carpooling.user";
+	public static final String SQL_CREATE_USER = "insert into carpooling.user (email,password,w_id,user_name) values(?, sha(?), ?, ?);";
 	public static final String SQL_UPDATE_USER = "update user set  email = ?, password = ?, user_name = ? where u_id = ?";
 	public static final String SQL_DELETE_USER = "delete from carpooling.user where u_id=?";
 	
@@ -62,5 +69,12 @@ public class Query {
 	 */
 	public static final String SQL_USER_VALIDATE = "select u_id,email, password, user_name from carpooling.user where  email=? and password=sha1(?) ";
 	
+
+	
+	public static final String GET_VEHICLE = "select * from vehicle where v_id = ?";
+	public static final String GET_ALL_VEHICLES = "select v_id,reg_no,u_id,no_of_seats,name from carpooling.vehicle";
+	public static final String CREATE_VEHICLE = "insert into vehicle values(?,?,?,?,?)";
+	public static final String UPDATE_VEHICLE = "update vehicle set v_id=?,reg_no=?,u_id=?,no_of_seats=?,name =? where v_id =?";
+	public static final String DELETE_VEHICLE = "delete from vehicle where v_id=?";	
 
 }

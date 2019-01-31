@@ -7,6 +7,10 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.accolite.carpooling.models.UserRide;
 
+/**
+ * row mapper for userride
+ *
+ */
 public class UserRideMapper implements RowMapper<UserRide>  {
 
 	@Override

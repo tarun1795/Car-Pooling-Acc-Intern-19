@@ -1,5 +1,7 @@
 package com.accolite.carpooling.services.impl;
 
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,11 +46,39 @@ public class RideServiceImpl implements RideService {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 	
-
+	
 
 	@Override
-	public RideDetailDto getRide(int rideId) {
-		return null;
+	public List<RideDetailDto> getAllRides(String src,String dest) {
+		 List<Ride> rides = rideDao.getAllRides(src,dest);
+		 List<RideDetailDto> rideDetails = new ArrayList<RideDetailDto>();
+		 for(Ride ride:rides) {
+			 Vehicle vehicle = vehicleDao.getVehicle(ride.getVehicleId());
+			 rideDetails.add(new RideDetailDto(vehicle, ride));
+		 }
+		 return rideDetails;
+	}
+
+	@Override
+	public RideDetailDto getRide(int id) {
+		Ride ride = rideDao.getRide(id);
+		Vehicle vehicle = vehicleDao.getVehicle(ride.getVehicleId());
+		return new RideDetailDto(vehicle, ride);
+	}
+
+	@Override
+	public void addRide(Ride ride) {
+		rideDao.addRide(ride);
+	}
+
+	@Override
+	public void deleteRide(int id) {
+		rideDao.deleteRide(id);
+	}
+	
+	@Override
+	public void updateRideSeats(int seats, int id) {
+		rideDao.updateRideSeats(seats,id);
 	}
 
 	@Override
@@ -57,7 +87,6 @@ public class RideServiceImpl implements RideService {
 		Ride ride = rideDao.getRide(rideId);
 		User user = userDao.getUser(requestUserId);
 		User driver = userDao.getUser(ride.getDriverId());
-		Vehicle vehicle = vehicleDao.getVehicle(ride.getVehicleId());
 		
 		
 		UserRide userRide = new UserRide(ride.getId(), user.getUserId(), noOfSeatsRequired, "requested", ride.getRideDate(), new Date());
@@ -74,7 +103,6 @@ public class RideServiceImpl implements RideService {
 	public void responseForRide(int rideId, int requestUserId,String status) {
 		User user = userDao.getUser(requestUserId);
 		Ride ride = rideDao.getRide(rideId);
-		Vehicle vehicle = vehicleDao.getVehicle(ride.getVehicleId());
 
 
 		if ("accept".equals(status)) {
@@ -88,7 +116,7 @@ public class RideServiceImpl implements RideService {
 			userRideDao.updateUserRideStatus(userRide);
 			
 			// TO_DO : change number of seats in 
-			rideDao.updateRideSeats(userRide.getNoOfSeats());
+			rideDao.updateRideSeats(userRide.getNoOfSeats(),userRide.getRideId());
 			
 			emailService.sendSimpleMessage(user.getEmail(), "Carpool Request Status",
 					"Your request for carpool has been accepted");

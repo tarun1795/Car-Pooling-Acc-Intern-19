@@ -6,14 +6,14 @@ import com.accolite.carpooling.models.Ride;
 
 public interface RideDao {
 
-	Ride getRide(int rideId);
+	
+	public List<Ride> getAllRides(String src, String dest);
 
-	List<Ride> getAllRides();
+	public Ride getRide(int id);
 
-	boolean addRide(Ride ride);
+	public void addRide(Ride ride);
 
-	boolean deleteRide(int id);
+	public void deleteRide(int id);
 
-	void updateRideSeats(int noOfSeats);
-
+	public void updateRideSeats(int seats, int id);
 }

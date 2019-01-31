@@ -2,6 +2,11 @@ package com.accolite.carpooling.models;
 
 import java.sql.Date;
 
+
+/**
+ * Wallet history table object
+ *
+ */
 public class WalletHistory {
 
 	private int transaction_id;

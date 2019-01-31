@@ -9,8 +9,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-/*
- * Configuration class for the project
+
+/**
+ * @author Abhinav
+ * AppConfig is the configuration class for the spring boot application 
  */
 @Configuration
 @EnableWebMvc
@@ -18,7 +20,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 public class AppConfig {
 
 
-	/*
+	/**
 	 * bean for mail sender
 	 */
 	@Bean

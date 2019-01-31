@@ -7,6 +7,10 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.accolite.carpooling.models.Vehicle;
 
+/**
+ * row mapper for vehicle
+ *
+ */
 public class VehicleMapper implements RowMapper<Vehicle> {
 
 	public Vehicle mapRow(ResultSet resultSet, int i) throws SQLException {

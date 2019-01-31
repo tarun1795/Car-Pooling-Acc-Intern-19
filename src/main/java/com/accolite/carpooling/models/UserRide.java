@@ -2,6 +2,11 @@ package com.accolite.carpooling.models;
 
 import java.util.Date;
 
+
+/**
+ * userride table object
+ *
+ */
 public class UserRide {
 
 	int rideId;
@@ -11,7 +16,6 @@ public class UserRide {
 	Date requestedTime;
 	Date acceptedTime;
 
-	
 	public UserRide() {
 	}
 
@@ -24,7 +28,6 @@ public class UserRide {
 		this.requestedTime = requestedTime;
 		this.acceptedTime = acceptedTime;
 	}
-
 
 	public int getRideId() {
 		return rideId;
