@@ -1,6 +1,11 @@
 package com.accolite.carpooling.dao.interfaces;
 
+import java.util.Date;
+
 public interface WalletMoneyDao {
-	public boolean AddMoney(int amt, int w_id);
-	public boolean TransferMoney(int ride_amt, int sw_id, int dw_id);
+	public int AddMoney(int amt, int w_id, int u_id, Date date);
+
+	public boolean TransferMoney(int ride_amt, int sw_id, int dw_id, int r_id, int u_id, Date date);
+
+	public int GetMoney(int w_id);
 }

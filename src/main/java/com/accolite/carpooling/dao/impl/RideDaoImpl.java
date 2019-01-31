@@ -52,4 +52,10 @@ public class RideDaoImpl implements RideDao{
 		return false;
 	}
 
+	@Override
+	public void updateRideSeats(int noOfSeats) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

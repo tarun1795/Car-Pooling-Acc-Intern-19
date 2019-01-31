@@ -28,7 +28,7 @@ import com.accolite.carpooling.services.interfaces.VehicleService;
 @RestController
 @EnableAutoConfiguration
 //remove this during final build
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RequestMapping("ride/")
 public class RideController {
 

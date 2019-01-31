@@ -14,4 +14,6 @@ public interface RideDao {
 
 	boolean deleteRide(int id);
 
+	void updateRideSeats(int noOfSeats);
+
 }

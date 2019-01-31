@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.accolite.carpooling.dto.LoginDto;
+import com.accolite.carpooling.dto.UserDetailDto;
 import com.accolite.carpooling.models.User;
 import com.accolite.carpooling.models.Vehicle;
 import com.accolite.carpooling.services.interfaces.EmailService;
@@ -26,7 +28,7 @@ import com.accolite.carpooling.services.interfaces.VehicleService;
 @RestController
 @EnableAutoConfiguration
 //remove this during final build
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RequestMapping(value = "/user")
 public class UserController {
 
@@ -38,6 +40,9 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	JdbcTemplate jdbcTemplate;
 
 	/*
 	 * method for getting a single user based on his id
@@ -52,9 +57,39 @@ public class UserController {
 	}
 
 	/*
+	 * method for getting user and his vehicles together
+	 */
+	@RequestMapping(value = "/details/{id}", method = RequestMethod.GET)
+	public ResponseEntity<?> getUserDetails(@PathVariable("id") int id) {
+
+		try {
+			UserDetailDto userDetails = userService.getUserDetail(id);
+			return new ResponseEntity<UserDetailDto>(userDetails, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<String>("user details not found", HttpStatus.BAD_REQUEST);
+
+		}
+	}
+
+	/*
+	 * method for updating user and his vehicles together
+	 */
+	@RequestMapping(value = "/details/{id}", method = RequestMethod.POST)
+	public ResponseEntity<?> updateUserDetails(@RequestBody UserDetailDto userDetails) {
+
+		if (userService.updateUserDetail(userDetails))
+			return new ResponseEntity<String>("user details updated", HttpStatus.OK);
+		else
+			return new ResponseEntity<String>("user details not found", HttpStatus.BAD_REQUEST);
+
+	}
+
+	
+
+	/*
 	 * method is used to get all the users info
 	 */
-	@RequestMapping(value = "all", method = RequestMethod.GET)
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public ResponseEntity<?> getUsers() {
 		List<User> users = userService.getAllUsers();
 		if (users != null)
@@ -89,7 +124,7 @@ public class UserController {
 	/*
 	 * method is used to login a user
 	 */
-	@RequestMapping(value = "login", method = RequestMethod.POST)
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ResponseEntity<?> login(@RequestBody LoginDto user) {
 		if (userService.login(user.getEmail(), user.getPassword())) {
 			return new ResponseEntity<String>("logged in", HttpStatus.OK);
@@ -97,12 +132,14 @@ public class UserController {
 			return new ResponseEntity<String>("unable to login", HttpStatus.BAD_REQUEST);
 	}
 
-	
 	/*
 	 * method is used to signup a new user
 	 */
-	@RequestMapping(value = "add", method = RequestMethod.POST)
+	@RequestMapping(value = "/signup", method = RequestMethod.POST)
 	public ResponseEntity<?> signup(@RequestBody User user) {
+		
+		int walletId = jdbcTemplate.queryForObject("select MAX(w_id)+1 from carpooling.wallet", Integer.class);
+		user.setWalletId(walletId);
 		if (userService.addUser(user))
 			return new ResponseEntity<String>("user added", HttpStatus.OK);
 		else
@@ -121,7 +158,6 @@ public class UserController {
 			return new ResponseEntity<String>("No vehicle with the id found", HttpStatus.BAD_REQUEST);
 	}
 
-	
 	/*
 	 * method is used to get all vehicles related to a particular user
 	 */

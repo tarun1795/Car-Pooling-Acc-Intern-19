@@ -64,7 +64,7 @@ public class UserDaoImpl implements UserDao {
 	public boolean addUser(User user) {
 		// TODO Auto-generated method stub
 		//System.out.println(userId);
-		return jdbcTemplate.update(Query.SQL_CREATE_USER, user.getUserId() , user.getEmail(),user.getPassword() ,user.getUserName() ) > 0;
+		return jdbcTemplate.update(Query.SQL_CREATE_USER, user.getUserId() , user.getEmail(),user.getPassword() ,user.getWalletId(), user.getUserName() ) > 0;
 	}
 
 }

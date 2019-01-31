@@ -4,12 +4,10 @@ public interface EmailService {
 
 	public void sendSimpleMessage(String to, String subject, String text);
 
-	void rideRequest(String to, String subject, String text, String link);
+	public void rideRequest(String to, String subject, String text, String link);
 
-	void favouriteUserPost(String to, String subject, String text, String link);
+	public void passwordRecovery(String to, String subject, String text, String link);
 
-	void passwordRecovery(String to, String subject, String text, String link);
+	public void invoice(String to, String subject, String text);
 
-	//void sendMessageWithAttachment(String to, String subject, String text, String pathToAttachment);
-	
 }

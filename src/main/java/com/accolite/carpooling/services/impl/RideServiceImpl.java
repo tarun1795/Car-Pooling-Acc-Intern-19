@@ -79,19 +79,16 @@ public class RideServiceImpl implements RideService {
 
 		if ("accept".equals(status)) {
 
+			User destUser = userDao.getUser(ride.getDriverId()); 
 			int costPerPerson = ride.getCostPerPerson();
-			walletService.transferMoney(costPerPerson, user.getUserId(), ride.getDriverId());
+			walletService.transferMoney(costPerPerson, user.getWalletId(), destUser.getWalletId(), ride.getId(), user.getUserId(), new Date());
 			
-			UserRide userRide = new UserRide();
-			userRide.setUserId(user.getUserId());
-			userRide.setRideId(ride.getId());
-			userRide.setNoOfSeats(vehicle.getNoOfSeats());
+			UserRide userRide = userRideDao.getUserRide(rideId,requestUserId);
 			userRide.setStatus("accepted");
-			userRide.setAcceptedTime(new Date());
-			userRide.setRequestedTime(ride.getRideDate());
 			userRideDao.updateUserRideStatus(userRide);
 			
 			// TO_DO : change number of seats in 
+			rideDao.updateRideSeats(userRide.getNoOfSeats());
 			
 			emailService.sendSimpleMessage(user.getEmail(), "Carpool Request Status",
 					"Your request for carpool has been accepted");
@@ -99,18 +96,13 @@ public class RideServiceImpl implements RideService {
 		} else if ("reject".equals(status)) {
 
 			
-			UserRide userRide = new UserRide();
-			userRide.setUserId(user.getUserId());
-			userRide.setRideId(ride.getId());
-			userRide.setNoOfSeats(vehicle.getNoOfSeats());
+			UserRide userRide = userRideDao.getUserRide(rideId,requestUserId);
 			userRide.setStatus("rejected");
-			userRide.setAcceptedTime(new Date());
-			userRide.setRequestedTime(ride.getRideDate());
 			userRideDao.updateUserRideStatus(userRide);
 			
 			emailService.sendSimpleMessage(user.getEmail(), "Carpool Request Status",
 					"Your request for carpool has been rejected");
-
+ 
 		}
 
 	}

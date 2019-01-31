@@ -29,10 +29,13 @@ public class Query {
 	public static final String SQL_TRANSFER_MONEY_HISTORY = "insert into wallet_history values(?,?,?,?,?)";
 	public static final String SQL_GET_WALLET_HISTORY = "select * from wallet_history";
 	public static final String SQL_GET_WALLET_DETAILS = "select * from wallet where w_id = ?";
-
+	public static final String SQL_GET_USER_RATING = "select avg(rating) as avg_rating from rating where u_id = ?";
+	public static final String SQL_INSERT_RATING_DRIEVR = "insert into rating(rating,feedback,u_id) values(?,?,?)";
+	public static final String SQL_GET_MONEY = "select * from wallet where w_id = ?";
 	/*
 	 *  user ride related queries
 	 */
+	public static final String SQL_GET_USERRIDE = "select r_id,u_id,status,no_of_seats,requested_time,accepted_time from user_ride where r_id = ? and u_id=?";
 	public static final String SQL_CREATE_USERRIDE = "insert into user_ride values(?,?,?,?,?,?)";
 	public static final String SQL_UPDATE_USERRIDE_STATUS = "update user_ride set status = ? where u_id = ? and r_id = ? and status='requested'";
 
@@ -48,9 +51,9 @@ public class Query {
 	/*
 	 *  user module queries
 	 */
-	public static final String SQL_GET_USER_BY_ID = "select u_id, email, password, user_name from carpooling.user where u_id = ?";
+	public static final String SQL_GET_USER_BY_ID = "select u_id, email, password,w_id, user_name from carpooling.user where u_id = ?";
 	public static final String SQL_GET_USERS = "select * from carpooling.user";
-	public static final String SQL_CREATE_USER = "insert into carpooling.user values(?, ?,sha1(?), ?);";
+	public static final String SQL_CREATE_USER = "insert into carpooling.user values(?, ?, sha(?), ?, ?);";
 	public static final String SQL_UPDATE_USER = "update user set  email = ?, password = ?, user_name = ? where u_id = ?";
 	public static final String SQL_DELETE_USER = "delete from carpooling.user where u_id=?";
 	

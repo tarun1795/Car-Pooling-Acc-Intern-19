@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import com.accolite.carpooling.constants.Query;
 import com.accolite.carpooling.dao.interfaces.UserRideDao;
 import com.accolite.carpooling.models.UserRide;
+import com.accolite.carpooling.rowmappers.UserRideMapper;
 
 @Component
 public class UserRideDaoImpl implements UserRideDao {
@@ -15,6 +16,13 @@ public class UserRideDaoImpl implements UserRideDao {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 
+	
+	@Override
+	public UserRide getUserRide(int rideId, int userId) {
+	
+		return jdbcTemplate.queryForObject(Query.SQL_GET_USERRIDE ,new Object[] {rideId, userId}, new UserRideMapper());
+	}
+	
 	@Override
 	public boolean createUserRide(UserRide userRide) {
 	

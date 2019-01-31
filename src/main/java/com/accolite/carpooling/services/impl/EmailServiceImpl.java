@@ -7,6 +7,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import com.accolite.carpooling.dao.interfaces.WalletHistoryDao;
+import com.accolite.carpooling.models.WalletHistory;
 import com.accolite.carpooling.services.interfaces.EmailService;
 
 @Service
@@ -14,6 +16,10 @@ public class EmailServiceImpl implements EmailService{
 
 	@Autowired
 	public JavaMailSender emailSender;
+	
+	@Autowired
+	public WalletHistoryDao walletHistoryDao;
+	
 	
 	@Override
 	public void sendSimpleMessage(String to, String subject, String text) {
@@ -24,7 +30,7 @@ public class EmailServiceImpl implements EmailService{
 		message.setText(text);
 		emailSender.send(message);
 	}
-	
+		
 	@Override
 	public void passwordRecovery(String to, String subject, String text, String link) {
 		SimpleMailMessage message = new SimpleMailMessage();
@@ -34,8 +40,9 @@ public class EmailServiceImpl implements EmailService{
 		emailSender.send(message);
 	}
 	
+	
 	@Override
-	public void favouriteUserPost(String to, String subject, String text, String link) {
+	public void rideRequest(String to, String subject, String text, String link){
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setTo(to);
 		message.setSubject(subject);
@@ -44,11 +51,17 @@ public class EmailServiceImpl implements EmailService{
 	}
 	
 	@Override
-	public void rideRequest(String to, String subject, String text, String link){
+	public void invoice(String to, String subject, String text){
+		List<WalletHistory> lwh = walletHistoryDao.getAllHistoryDetails();
+		text = text + "\n";
+		for(WalletHistory w : lwh) {
+			text = text + w + "\n";
+		}
+		
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setTo(to);
 		message.setSubject(subject);
-		message.setText("Hi user\n\n\n" + text +"\n\n\nVisit "+link);
+		message.setText("Hi user\n\n\n Please find your Invoice" + text +"\n\n\n Thank You \n\n Carpooling");
 		emailSender.send(message);
 	}
 	
