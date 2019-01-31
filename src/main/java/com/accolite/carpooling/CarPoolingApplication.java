@@ -25,7 +25,7 @@ public class CarPoolingApplication {
 	        .httpBasic()
 	      .and()
 	        .authorizeRequests()
-	          .antMatchers("/admin/api/rides","/admin/api/ride/*","/admin/api/add").permitAll()
+	          .antMatchers("/admin/api/update/*","/admin/api/rides").permitAll()
 	          .anyRequest().authenticated();
 	    }
 	  }

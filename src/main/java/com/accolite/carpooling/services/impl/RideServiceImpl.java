@@ -22,8 +22,8 @@ public class RideServiceImpl implements RideService{
 	private VehicleDao vehicleDao;
 
 	@Override
-	public List<RideDetailDto> getAllRides() {
-		 List<Ride> rides = rideDao.getAllRides();
+	public List<RideDetailDto> getAllRides(String src,String dest) {
+		 List<Ride> rides = rideDao.getAllRides(src,dest);
 		 List<RideDetailDto> rideDetails = new ArrayList<RideDetailDto>();
 		 for(Ride ride:rides) {
 			 Vehicle vehicle = vehicleDao.getVehicle(ride.getVehicleId());
@@ -40,14 +40,17 @@ public class RideServiceImpl implements RideService{
 	}
 
 	@Override
-	public boolean addRide(Ride ride) {
-		return rideDao.addRide(ride);
+	public void addRide(Ride ride) {
+		rideDao.addRide(ride);
 	}
 
 	@Override
-	public boolean deleteRide(int id) {
-		return rideDao.deleteRide(id);
+	public void deleteRide(int id) {
+		rideDao.deleteRide(id);
 	}
 	
-
+	@Override
+	public void updateRideSeats(int seats, int id) {
+		rideDao.updateRideSeats(seats,id);
+	}
 }

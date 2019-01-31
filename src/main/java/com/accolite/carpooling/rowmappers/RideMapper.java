@@ -19,6 +19,7 @@ public class RideMapper implements RowMapper<Ride>{
 		ride.setRideDate(rs.getDate("ride_date"));
 		ride.setVehicleId(rs.getInt("v_id"));
 		ride.setId(rs.getInt("r_id"));
+		ride.setSeatsAvailable(rs.getInt("seats_available"));
 		return ride;
 	}
 	

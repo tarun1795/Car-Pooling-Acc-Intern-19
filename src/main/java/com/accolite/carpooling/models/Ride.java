@@ -15,6 +15,7 @@ public class Ride {
 	private Date createdDate;
 	private int vehicleId;
 	private int costPerPerson;
+	private int seatsAvailable;
 	
 	public Ride() {
 		
@@ -76,5 +77,20 @@ public class Ride {
 	public void setVehicleId(int vehicleId) {
 		this.vehicleId = vehicleId;
 	}
-		
+	
+	public int getSeatsAvailable() {
+		return seatsAvailable;
+	}
+
+	@Override
+	public String toString() {
+		return "Ride [source=" + source + ", destination=" + destination + ", driverId=" + driverId + ", rideDate="
+				+ rideDate + ", id=" + id + ", createdDate=" + createdDate + ", vehicleId=" + vehicleId
+				+ ", costPerPerson=" + costPerPerson + ", seatsAvailable=" + seatsAvailable + "]";
+	}
+
+	public void setSeatsAvailable(int seatsAvailable) {
+		this.seatsAvailable = seatsAvailable;
+	}
+	
 }
