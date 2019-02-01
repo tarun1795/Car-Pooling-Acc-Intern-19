@@ -17,7 +17,7 @@ public class WalletMoneyMapper implements RowMapper<WalletMoney> {
 
 		WalletMoney wm = new WalletMoney();
 		wm.setAmt(resultSet.getInt("amount"));
-		wm.setW_id(resultSet.getInt("w_id"));
+		wm.setwId(resultSet.getInt("w_id"));
 		return wm;
 	}
 }

@@ -2,16 +2,18 @@ package com.accolite.carpooling.rowmappers;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import org.springframework.jdbc.core.RowMapper;
+
 import com.accolite.carpooling.models.Ride;
 
 /**
  * row mapper for Ride
  *
  */
-public class RideMapper implements RowMapper<Ride>{
-	
-	public Ride mapRow(ResultSet rs,int i) throws SQLException {
+public class RideMapper implements RowMapper<Ride> {
+
+	public Ride mapRow(ResultSet rs, int i) throws SQLException {
 		Ride ride = new Ride();
 		ride.setCostPerPerson(rs.getInt("cost_per_person"));
 		ride.setCreatedDate(rs.getDate("created_date"));
@@ -24,5 +26,5 @@ public class RideMapper implements RowMapper<Ride>{
 		ride.setSeatsAvailable(rs.getInt("seats_available"));
 		return ride;
 	}
-	
+
 }

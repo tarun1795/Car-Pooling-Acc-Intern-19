@@ -2,10 +2,11 @@ package com.accolite.carpooling.dto;
 
 import java.util.List;
 
-import com.accolite.carpooling.models.*;
+import com.accolite.carpooling.models.User;
+import com.accolite.carpooling.models.Vehicle;
 
 /**
- *	used for getting User and his associated Vehicles together 
+ * used for getting User and his associated Vehicles together
  *
  */
 public class UserDetailDto {

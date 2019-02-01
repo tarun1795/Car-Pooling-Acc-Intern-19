@@ -9,7 +9,7 @@ import com.accolite.carpooling.dto.BookingDto;
 
 public class BookingMapper implements RowMapper<BookingDto> {
 
-	public BookingDto mapRow(ResultSet resultSet, int i) throws SQLException{
+	public BookingDto mapRow(ResultSet resultSet, int i) throws SQLException {
 		BookingDto bookingDto = new BookingDto();
 		bookingDto.setDriverName(resultSet.getString("driver_name"));
 		bookingDto.setNoOfSeats(resultSet.getInt("no_of_seats"));

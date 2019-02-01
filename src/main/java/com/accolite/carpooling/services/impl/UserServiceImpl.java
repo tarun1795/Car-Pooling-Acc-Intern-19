@@ -1,8 +1,7 @@
 package com.accolite.carpooling.services.impl;
 
-import com.accolite.carpooling.services.interfaces.UserService;
-
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +10,7 @@ import com.accolite.carpooling.dao.interfaces.VehicleDao;
 import com.accolite.carpooling.dto.UserDetailDto;
 import com.accolite.carpooling.models.User;
 import com.accolite.carpooling.models.Vehicle;
+import com.accolite.carpooling.services.interfaces.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {

@@ -1,7 +1,7 @@
 package com.accolite.carpooling.dto;
 
 /**
- * a DTO used to store username and password during login 
+ * a DTO used to store username and password during login
  *
  */
 public class LoginDto {

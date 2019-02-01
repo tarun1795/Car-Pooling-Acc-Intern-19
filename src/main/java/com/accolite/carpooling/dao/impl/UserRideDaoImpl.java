@@ -61,8 +61,7 @@ public class UserRideDaoImpl implements UserRideDao {
 	@Override
 	public List<UserRide> getAllUserRides() {
 
-		List<UserRide> userRides = jdbcTemplate.query(Query.SQL_GET_ALL_USERRIDES, new UserRideMapper());
-		return userRides;
+		return jdbcTemplate.query(Query.SQL_GET_ALL_USERRIDES, new UserRideMapper());
 	}
 
 }

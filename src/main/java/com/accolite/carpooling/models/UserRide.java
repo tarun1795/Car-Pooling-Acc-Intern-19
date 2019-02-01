@@ -2,7 +2,6 @@ package com.accolite.carpooling.models;
 
 import java.util.Date;
 
-
 /**
  * userride table object
  *

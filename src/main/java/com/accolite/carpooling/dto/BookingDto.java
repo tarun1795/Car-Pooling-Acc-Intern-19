@@ -9,8 +9,7 @@ public class BookingDto {
 	Date rideDate;
 	String driverName;
 	String status;
-	
-	
+
 	public String getStatus() {
 		return status;
 	}

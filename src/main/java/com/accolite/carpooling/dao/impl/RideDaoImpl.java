@@ -26,13 +26,14 @@ public class RideDaoImpl implements RideDao {
 
 	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
-	
+
 	/**
-	 * returns all active rides 
+	 * returns all active rides
 	 */
+	
 	@Override
 	public List<RideDto> getRides(String source, String destination) {
-		return jdbcTemplate.query(Query.SQL_SELECT_RIDE_JOIN_USER_JOIN_VEHICLE,new RideDtoMapper());
+		return jdbcTemplate.query(Query.SQL_SELECT_RIDE_JOIN_USER_JOIN_VEHICLE, new RideDtoMapper());
 	}
 
 	/**
@@ -44,11 +45,11 @@ public class RideDaoImpl implements RideDao {
 		parameters.addValue("src", src);
 		if (src == null && dest == null)
 			return jdbcTemplate.query(Query.GET_ALL_RIDES, new RideMapper());
-		if (src == null && dest != null) {
+		else if (src == null) {
 			parameters.addValue("dest", dest);
 			return jdbcTemplate.query(Query.GET_ALL_RIDES_TO_DEST, parameters, new RideMapper());
 		}
-		if (dest == null && src != null) {
+		else if (dest == null ) {
 			parameters.addValue("src", src);
 			return jdbcTemplate.query(Query.GET_ALL_RIDES_FROM_SRC, parameters, new RideMapper());
 		}
@@ -102,17 +103,12 @@ public class RideDaoImpl implements RideDao {
 	public void updateRideSeats(int seats, int id) {
 		MapSqlParameterSource parameters = new MapSqlParameterSource();
 		parameters.addValue("id", id);
-		System.out.println(id);
 		Ride ride = getRide(id);
-		System.out.println(ride.getId());
 		parameters.addValue("seats", ride.getSeatsAvailable() - seats);
 		jdbcTemplate.update(Query.UPDATE_RIDE_SEATS, parameters);
 	}
 
-	
-	
-	public List<BookingDto> getAllBookings()
-	{
+	public List<BookingDto> getAllBookings() {
 		return jdbcTemplate.query(Query.SQL_GET_ALL_BOOKINGS, new BookingMapper());
 	}
 }

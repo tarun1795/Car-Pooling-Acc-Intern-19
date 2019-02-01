@@ -1,11 +1,7 @@
 package com.accolite.carpooling.controllers;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -40,15 +36,15 @@ public class TestRideController {
 
 	}
 
-	@Test
-	public void testResponseForRide()
-	{
-		doThrow(IllegalStateException.class).when(service).responseForRide(5, 2, "rejected");
-		ResponseEntity<String> rideException = (ResponseEntity<String>) controller.responseForRide(5, 2, "rejected");
-		
-
-		
-		assertEquals("response not sent",rideException.getBody());
-	}
+//	@Test
+//	public void testResponseForRide()
+//	{
+//		doThrow(IllegalStateException.class).when(service).responseForRide(5, 2, "rejected");
+//		ResponseEntity<String> rideException = (ResponseEntity<String>) controller.responseForRide(5, 2, "rejected");
+//		
+//
+//		
+//		assertEquals("response not sent",rideException.getBody());
+//	}
 	
 }

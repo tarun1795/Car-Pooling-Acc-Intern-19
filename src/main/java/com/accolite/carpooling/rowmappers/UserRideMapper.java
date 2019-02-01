@@ -11,10 +11,10 @@ import com.accolite.carpooling.models.UserRide;
  * row mapper for userride
  *
  */
-public class UserRideMapper implements RowMapper<UserRide>  {
+public class UserRideMapper implements RowMapper<UserRide> {
 
 	@Override
-	public UserRide mapRow(ResultSet rs, int rowNum) throws SQLException { 
+	public UserRide mapRow(ResultSet rs, int rowNum) throws SQLException {
 		UserRide userRide = new UserRide();
 		userRide.setUserId(rs.getInt("u_id"));
 		userRide.setRideId(rs.getInt("r_id"));

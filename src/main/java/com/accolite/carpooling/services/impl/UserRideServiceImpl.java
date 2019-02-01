@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.accolite.carpooling.dao.interfaces.RideDao;
 import com.accolite.carpooling.dao.interfaces.UserRideDao;
 import com.accolite.carpooling.dto.BookingDto;
 import com.accolite.carpooling.models.UserRide;
@@ -15,6 +16,9 @@ public class UserRideServiceImpl implements UserRideService {
 
 	@Autowired
 	UserRideDao userRideDao;
+	
+	@Autowired
+	RideDao rideDao;
 
 	@Override
 	public UserRide getUserRide(int rideId, int userId) {
@@ -23,8 +27,7 @@ public class UserRideServiceImpl implements UserRideService {
 
 	@Override
 	public List<UserRide> getAllUserRides() {
-		List<UserRide> userRides = userRideDao.getAllUserRides();
-		return userRides;
+		return userRideDao.getAllUserRides();
 	}
 
 	@Override
@@ -39,6 +42,6 @@ public class UserRideServiceImpl implements UserRideService {
 
 	@Override
 	public List<BookingDto> getAllBookings() {
-	return null;	
+		return rideDao.getAllBookings();
 	}
 }

@@ -11,7 +11,7 @@ public interface UserRideDao {
 	boolean createUserRide(UserRide userRide);
 
 	boolean updateUserRideStatus(UserRide userRide);
-	
+
 	List<UserRide> getAllUserRides();
 
 }

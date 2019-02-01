@@ -1,10 +1,7 @@
 package com.accolite.carpooling.services;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
-
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,12 +10,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 
-import com.accolite.carpooling.dao.interfaces.VehicleDao;
-import com.accolite.carpooling.models.Vehicle;
 import com.accolite.carpooling.services.impl.EmailServiceImpl;
-import com.accolite.carpooling.services.impl.VehicleServiceImpl;
 
 public class TestEmailService {
 

@@ -4,7 +4,7 @@ import com.accolite.carpooling.models.Ride;
 import com.accolite.carpooling.models.Vehicle;
 
 /**
- * used for getting Ride and Vehicle associated with the ride 
+ * used for getting Ride and Vehicle associated with the ride
  *
  */
 public class RideDetailDto {
@@ -15,6 +15,9 @@ public class RideDetailDto {
 		super();
 		this.vehicle = vehicle;
 		this.ride = ride;
+	}
+
+	public RideDetailDto() {
 	}
 
 	public Vehicle getVehicle() {

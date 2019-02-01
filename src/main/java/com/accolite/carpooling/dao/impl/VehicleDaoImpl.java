@@ -1,6 +1,7 @@
 package com.accolite.carpooling.dao.impl;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -13,8 +14,8 @@ import com.accolite.carpooling.rowmappers.VehicleMapper;
 
 @Component
 public class VehicleDaoImpl implements VehicleDao {
- 
-	@Autowired 
+
+	@Autowired
 	JdbcTemplate jdbcTemplate;
 
 	@Override
@@ -24,16 +25,16 @@ public class VehicleDaoImpl implements VehicleDao {
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
-	} 
+	}
 
 	@Override
 	public List<Vehicle> getAllVehicles(int userId) {
 		return jdbcTemplate.query(Query.SQL_GET_VEHICLES, new Object[] { userId }, new VehicleMapper());
 	}
- 
+
 	@Override
 	public boolean createVehicle(Vehicle vehicle) {
-		
+
 		return jdbcTemplate.update(Query.SQL_CREATE_VEHICLE, vehicle.getVehicleId(), vehicle.getRegNo(),
 				vehicle.getUserId(), vehicle.getNoOfSeats(), vehicle.getName()) > 0;
 	}
@@ -43,7 +44,7 @@ public class VehicleDaoImpl implements VehicleDao {
 		return jdbcTemplate.update(Query.SQL_UPDATE_VEHICLE, vehicle.getVehicleId(), vehicle.getRegNo(),
 				vehicle.getUserId(), vehicle.getNoOfSeats(), vehicle.getName(), vehicle.getVehicleId()) > 0;
 	}
- 
+
 	@Override
 	public boolean deleteVehicle(int id) {
 		return jdbcTemplate.update(Query.SQL_DELETE_VEHICLE, id) > 0;

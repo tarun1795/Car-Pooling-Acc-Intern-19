@@ -10,11 +10,11 @@ import com.accolite.carpooling.models.Vehicle;
 import com.accolite.carpooling.services.interfaces.VehicleService;
 
 @Service
-public class VehicleServiceImpl implements VehicleService{
+public class VehicleServiceImpl implements VehicleService {
 
 	@Autowired
 	VehicleDao vehicleDAO;
-	 
+
 	@Override
 	public Vehicle getVehicle(int id) {
 		return vehicleDAO.getVehicle(id);

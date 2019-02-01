@@ -1,8 +1,8 @@
 package com.accolite.carpooling.services.impl;
 
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -106,7 +106,6 @@ public class RideServiceImpl implements RideService {
 	@Override
 	public void responseForRide(int rideId, int requestUserId, String status) {
 
-		System.out.println(rideId + " " + requestUserId + " " + status);
 		User user = userDao.getUser(requestUserId);
 		Ride ride = rideDao.getRide(rideId);
 
@@ -140,7 +139,7 @@ public class RideServiceImpl implements RideService {
 
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			e.getCause();
 		}
 
 	}

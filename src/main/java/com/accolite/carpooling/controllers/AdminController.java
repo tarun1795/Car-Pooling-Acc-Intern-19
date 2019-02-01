@@ -1,5 +1,6 @@
 package com.accolite.carpooling.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,31 +42,33 @@ public class AdminController {
 	 * @return rides if exist else String "no rides found"
 	 */
 	@GetMapping(value = "/rides")
-	public ResponseEntity<?> getAllRides(@RequestParam(value = "src", required = false) String src,
+	public ResponseEntity<List<RideDetailDto>> getAllRides(@RequestParam(value = "src", required = false) String src,
 			@RequestParam(value = "dest", required = false) String dest) {
 		List<RideDetailDto> rides = rideService.getAllRides(src, dest);
 		if (rides.isEmpty()) {
-			return new ResponseEntity<String>("no rides found", HttpStatus.NO_CONTENT);
+			return new ResponseEntity<List<RideDetailDto>>(new ArrayList<RideDetailDto>(), HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<List<RideDetailDto>>(rides, HttpStatus.OK);
 	}
 
 	/**
 	 * gets the ride object for a specific id
+	 * 
 	 * @param id ride id
 	 * @return ride if exist else String "ride not found"
 	 */
 	@GetMapping(value = "/ride/{id}")
-	public ResponseEntity<?> getRide(@PathVariable("id") int id) {
+	public ResponseEntity<RideDetailDto> getRide(@PathVariable("id") int id) {
 		RideDetailDto ride = rideService.getRide(id);
 		if (ride == null) {
-			return new ResponseEntity<String>("ride not found", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<RideDetailDto>(new RideDetailDto(), HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<RideDetailDto>(ride, HttpStatus.OK);
 	}
 
 	/**
 	 * creates a new Ride in db
+	 * 
 	 * @param ride ride object
 	 */
 	@PostMapping(value = "/add")
@@ -75,6 +78,7 @@ public class AdminController {
 
 	/**
 	 * used to delete an existing ride in db
+	 * 
 	 * @param id ride id
 	 */
 	@DeleteMapping(value = "/delete/{id}")
@@ -84,12 +88,12 @@ public class AdminController {
 
 	/**
 	 * updates the existing ride (no_of_seats) in db
+	 * 
 	 * @param seats number of seats to reduce
-	 * @param id ride to be updated
+	 * @param id    ride to be updated
 	 */
 	@PutMapping(value = "/update/{id}")
 	public void updateRideSeats(@RequestBody Integer seats, @PathVariable("id") int id) {
-		System.out.println(id);
 		rideService.updateRideSeats(seats.intValue(), id);
 	}
 }

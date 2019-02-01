@@ -1,6 +1,5 @@
 package com.accolite.carpooling.models;
 
-
 /**
  * vehicle table object
  *

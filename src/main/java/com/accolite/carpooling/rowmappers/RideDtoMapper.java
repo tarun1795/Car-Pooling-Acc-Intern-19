@@ -11,7 +11,7 @@ public class RideDtoMapper implements RowMapper<RideDto> {
 
 	@Override
 	public RideDto mapRow(ResultSet rs, int rowNum) throws SQLException {
-		RideDto rideDto=new RideDto();
+		RideDto rideDto = new RideDto();
 		rideDto.setRideId(rs.getString(1));
 		rideDto.setSeatsAvailable(Integer.parseInt(rs.getString(2)));
 		rideDto.setCostPerSeat(Integer.parseInt(rs.getString(3)));

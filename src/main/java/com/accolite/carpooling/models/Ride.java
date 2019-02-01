@@ -5,7 +5,7 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
- *	Ride table object 
+ * Ride table object
  *
  */
 public class Ride {
@@ -23,6 +23,9 @@ public class Ride {
 
 	public Ride() {
 
+		/**
+		 * creates a empty ride obj
+		 */
 	}
 
 	public int getDriverId() {

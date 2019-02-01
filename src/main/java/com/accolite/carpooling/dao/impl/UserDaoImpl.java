@@ -1,6 +1,7 @@
 package com.accolite.carpooling.dao.impl;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -54,8 +55,9 @@ public class UserDaoImpl implements UserDao {
 	 * used to update an existing user
 	 */
 	@Override
-	public boolean updateUser(User login,int user_id) {
-		return jdbcTemplate.update(Query.SQL_UPDATE_USER,  login.getEmail(), login.getPassword(),  login.getUserName(), user_id) > 0;
+	public boolean updateUser(User login, int userId) {
+		return jdbcTemplate.update(Query.SQL_UPDATE_USER, login.getEmail(), login.getPassword(), login.getUserName(),
+				userId) > 0;
 	}
 
 	/**
@@ -64,31 +66,30 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public boolean deleteUser(int id) {
 		return jdbcTemplate.update(Query.SQL_DELETE_USER, id) > 0;
-	}	
+	}
 
 	/**
 	 * used for logging in a user
 	 */
 	@Override
 	public boolean login(String email, String password) {
-		
-			User user = jdbcTemplate.queryForObject(Query.SQL_USER_VALIDATE, new Object[] { email, password },
-					new UserMapper());
-			System.out.println(user);
+
+		User user = jdbcTemplate.queryForObject(Query.SQL_USER_VALIDATE, new Object[] { email, password },
+				new UserMapper());
+		if(user.getUserId()>0) {
 			return true;
-//		} catch (Exception e) {
-//			return false;
-//		}
+		}else {
+			return false;
+		}
 	}
 
 	/**
-	 * used to create a new user 
+	 * used to create a new user
 	 */
 	@Override
 	public boolean addUser(User user) {
-		// TODO Auto-generated method stub
-//		System.out.println(user.getWalletId());
-		return jdbcTemplate.update(Query.SQL_CREATE_USER,  user.getEmail(),user.getPassword() ,user.getWalletId(), user.getUserName() ) > 0;
+		return jdbcTemplate.update(Query.SQL_CREATE_USER, user.getEmail(), user.getPassword(), user.getWalletId(),
+				user.getUserName()) > 0;
 	}
 
 }
