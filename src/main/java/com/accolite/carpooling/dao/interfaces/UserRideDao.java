@@ -1,5 +1,7 @@
 package com.accolite.carpooling.dao.interfaces;
 
+import java.util.List;
+
 import com.accolite.carpooling.models.UserRide;
 
 public interface UserRideDao {
@@ -9,5 +11,7 @@ public interface UserRideDao {
 	boolean createUserRide(UserRide userRide);
 
 	boolean updateUserRideStatus(UserRide userRide);
+	
+	List<UserRide> getAllUserRides();
 
 }

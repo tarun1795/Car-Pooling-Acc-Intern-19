@@ -25,7 +25,7 @@ import com.accolite.carpooling.services.interfaces.RideService;
  * Admin Controller provides apis for admin operations
  */
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @EnableAutoConfiguration
 @RequestMapping("admin/api/")
 public class AdminController {

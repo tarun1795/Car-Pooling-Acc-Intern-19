@@ -10,7 +10,11 @@ import org.springframework.stereotype.Repository;
 
 import com.accolite.carpooling.constants.Query;
 import com.accolite.carpooling.dao.interfaces.RideDao;
+import com.accolite.carpooling.dto.BookingDto;
+import com.accolite.carpooling.dto.RideDto;
 import com.accolite.carpooling.models.Ride;
+import com.accolite.carpooling.rowmappers.BookingMapper;
+import com.accolite.carpooling.rowmappers.RideDtoMapper;
 import com.accolite.carpooling.rowmappers.RideMapper;
 
 /**
@@ -22,7 +26,14 @@ public class RideDaoImpl implements RideDao {
 
 	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
-
+	
+	/**
+	 * returns all active rides 
+	 */
+	@Override
+	public List<RideDto> getRides(String source, String destination) {
+		return jdbcTemplate.query(Query.SQL_SELECT_RIDE_JOIN_USER_JOIN_VEHICLE,new RideDtoMapper());
+	}
 
 	/**
 	 * returns all rides matching with src , dest values
@@ -98,4 +109,10 @@ public class RideDaoImpl implements RideDao {
 		jdbcTemplate.update(Query.UPDATE_RIDE_SEATS, parameters);
 	}
 
+	
+	
+	public List<BookingDto> getAllBookings()
+	{
+		return jdbcTemplate.query(Query.SQL_GET_ALL_BOOKINGS, new BookingMapper());
+	}
 }

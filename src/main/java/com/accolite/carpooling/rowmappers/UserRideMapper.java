@@ -14,7 +14,7 @@ import com.accolite.carpooling.models.UserRide;
 public class UserRideMapper implements RowMapper<UserRide>  {
 
 	@Override
-	public UserRide mapRow(ResultSet rs, int rowNum) throws SQLException {
+	public UserRide mapRow(ResultSet rs, int rowNum) throws SQLException { 
 		UserRide userRide = new UserRide();
 		userRide.setUserId(rs.getInt("u_id"));
 		userRide.setRideId(rs.getInt("r_id"));
@@ -22,7 +22,7 @@ public class UserRideMapper implements RowMapper<UserRide>  {
 		userRide.setNoOfSeats(rs.getInt("no_of_seats"));
 		userRide.setAcceptedTime(rs.getDate("accepted_time"));
 		userRide.setRequestedTime(rs.getDate("requested_time"));
-		return null;
+		return userRide;
 	}
 
 }

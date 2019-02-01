@@ -20,7 +20,7 @@ public class WalletServiceImpl implements WalletService{
 		System.out.println(result);
 		return result;
 	}
-	
+	 
 	@Override
 	public void transferMoney(int amt, int sw_id, int dw_id,int r_id, int u_id, Date date) {
 		System.out.println(walletMoneyDaoImpl.TransferMoney(amt, sw_id, dw_id,r_id, u_id, date));

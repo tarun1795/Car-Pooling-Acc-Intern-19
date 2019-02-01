@@ -38,6 +38,6 @@ public interface EmailService {
 	 * @param subject subject of mail
 	 * @param text body of mail
 	 */
-	public void invoice(String to, String subject, String text);
+	public void invoice(String to, String subject, String text, int u_id);
 
 }

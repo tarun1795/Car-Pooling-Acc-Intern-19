@@ -2,13 +2,24 @@ package com.accolite.carpooling.services.interfaces;
 
 import java.util.List;
 import com.accolite.carpooling.models.Ride;
+import com.accolite.carpooling.dto.BookingDto;
 import com.accolite.carpooling.dto.RideDetailDto;
+import com.accolite.carpooling.dto.RideDto;
 
 /**
  * Ride related operations can be done using RideService 
  *
  */
 public interface RideService {
+	/**
+	 * lists all rides 
+	 * @param src Source
+	 * @param dest Destination
+	 * @return return list of matching rides
+	 */
+	
+	public List<RideDto> getRides(String source, String destination);
+	
 	/**
 	 * lists all rides from src to dest
 	 * @param src Source
@@ -58,4 +69,7 @@ public interface RideService {
 	 * @param status status (accepted,rejected,pending)
 	 */
 	void responseForRide(int rideId, int requestUserId, String status);
+	
+	
+	List<BookingDto> getAllBookings();
 }

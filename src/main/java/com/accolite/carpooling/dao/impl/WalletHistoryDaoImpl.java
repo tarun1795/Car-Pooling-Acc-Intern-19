@@ -25,8 +25,8 @@ public class WalletHistoryDaoImpl implements WalletHistoryDao{
 	 * gets all the wallet history table entries
 	 */
 	@Override
-	public List<WalletHistory> getAllHistoryDetails() {
-		return jdbcTemplate.query(Query.SQL_GET_WALLET_HISTORY, new Object[] { }, new WalletHistoryMapper());
+	public List<WalletHistory> getAllHistoryDetails(int u_id) {
+		return jdbcTemplate.query(Query.SQL_GET_WALLET_HISTORY, new Object[] {u_id }, new WalletHistoryMapper());
 	}
 
 }

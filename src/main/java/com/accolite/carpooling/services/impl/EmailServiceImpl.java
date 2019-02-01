@@ -51,8 +51,8 @@ public class EmailServiceImpl implements EmailService{
 	}
 	
 	@Override
-	public void invoice(String to, String subject, String text){
-		List<WalletHistory> lwh = walletHistoryDao.getAllHistoryDetails();
+	public void invoice(String to, String subject, String text, int u_id){
+		List<WalletHistory> lwh = walletHistoryDao.getAllHistoryDetails(u_id);
 		text = text + "\n";
 		for(WalletHistory w : lwh) {
 			text = text + w + "\n";

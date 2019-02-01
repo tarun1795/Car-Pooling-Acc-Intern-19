@@ -6,6 +6,6 @@ import com.accolite.carpooling.models.*;
 
 public interface WalletHistoryDao {
 
-	public List<WalletHistory> getAllHistoryDetails();
+	public List<WalletHistory> getAllHistoryDetails(int u_id);
 
 }

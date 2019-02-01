@@ -1,5 +1,6 @@
 package com.accolite.carpooling.dao.impl;
 
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -25,18 +26,24 @@ public class UserRideDaoImpl implements UserRideDao {
 	 */
 	@Override
 	public UserRide getUserRide(int rideId, int userId) {
-	
-		return jdbcTemplate.queryForObject(Query.SQL_GET_USERRIDE ,new Object[] {rideId, userId}, new UserRideMapper());
+
+		try {
+			return jdbcTemplate.queryForObject(Query.SQL_GET_USERRIDE, new Object[] { rideId, userId },
+					new UserRideMapper());
+		} catch (Exception e) {
+			return null;
+		}
 	}
-	
+
 	/**
 	 * used to create an entry into the userride table
 	 */
 	@Override
 	public boolean createUserRide(UserRide userRide) {
-	
-		return jdbcTemplate.update(Query.SQL_CREATE_USERRIDE, userRide.getRideId(), userRide.getUserId(),userRide.getStatus()
-				,userRide.getNoOfSeats(),userRide.getRequestedTime(),userRide.getAcceptedTime()) > 0;
+
+		return jdbcTemplate.update(Query.SQL_CREATE_USERRIDE, userRide.getRideId(), userRide.getUserId(),
+				userRide.getStatus(), userRide.getNoOfSeats(), userRide.getRequestedTime(),
+				userRide.getAcceptedTime()) > 0;
 	}
 
 	/**
@@ -44,8 +51,18 @@ public class UserRideDaoImpl implements UserRideDao {
 	 */
 	@Override
 	public boolean updateUserRideStatus(UserRide userRide) {
-		return jdbcTemplate.update(Query.SQL_UPDATE_USERRIDE_STATUS, userRide.getStatus(), userRide.getUserId(), userRide.getRideId()) > 0;
+		return jdbcTemplate.update(Query.SQL_UPDATE_USERRIDE_STATUS, userRide.getStatus(), userRide.getUserId(),
+				userRide.getRideId()) > 0;
 	}
 
-	
+	/**
+	 * this method is used for getting all user ride objects
+	 */
+	@Override
+	public List<UserRide> getAllUserRides() {
+
+		List<UserRide> userRides = jdbcTemplate.query(Query.SQL_GET_ALL_USERRIDES, new UserRideMapper());
+		return userRides;
+	}
+
 }
