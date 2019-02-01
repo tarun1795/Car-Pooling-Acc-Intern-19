@@ -43,7 +43,7 @@ public class EmailServiceImpl implements EmailService{
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setTo(to);
 		message.setSubject(subject);
-		message.setText("Hi user\n\n\n" + text +"\n\n\nVisit "+link);
+		message.setText("Hi user\n\n\n" + text +"\n\n\nVisit the link for Password recovery"+link);
 		emailSender.send(message);
 	}
 	
@@ -65,13 +65,13 @@ public class EmailServiceImpl implements EmailService{
 	 * @see com.accolite.carpooling.services.interfaces.EmailService#invoice(java.lang.String, java.lang.String, java.lang.String)
 	 */
 	@Override
-	public void invoice(String to, String subject, String text){
-		List<WalletHistory> lwh = walletHistoryDAO.getAllHistoryDetails();
-		text = text + "\n";
-		for(WalletHistory w : lwh) {
-			text = text + w + "\n";
-		}
+	public void invoice(String to, String subject, StringBuilder text, int wId){
+		List<WalletHistory> lwh = walletHistoryDAO.getAllHistoryDetails(wId);
+		text = text.append("\n");
 		
+		for(WalletHistory w : lwh) {
+			text = text.append(w).append("\n");
+		}
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setTo(to);
 		message.setSubject(subject);

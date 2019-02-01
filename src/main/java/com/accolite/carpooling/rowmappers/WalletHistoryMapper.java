@@ -5,10 +5,11 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import com.accolite.carpooling.models.*;
+import com.accolite.carpooling.models.WalletHistory;
 public class WalletHistoryMapper  implements RowMapper<WalletHistory> {
 	
 	
+	@Override
 	public WalletHistory mapRow(ResultSet resultSet, int i) throws SQLException {
 
 		WalletHistory wh = new WalletHistory();

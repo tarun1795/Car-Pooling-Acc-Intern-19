@@ -14,21 +14,27 @@ public class WalletServiceImpl implements WalletService{
 	@Autowired
 	WalletMoneyDAO walletMoneyImplDAO;
 	
+	/*
+	 * (non-Javadoc)
+	 * @see com.accolite.carpooling.services.interfaces.WalletService#addMoney(int, int, int, java.util.Date)
+	 */
 	@Override
-	public int addMoney(int amt, int w_id, int u_id, Date date) {
-		int result = walletMoneyImplDAO.AddMoney(amt, w_id, u_id, date);
-		System.out.println(result);
-		return result;
+	public int addMoney(int amt, int wId, int uId, Date date) {
+		return walletMoneyImplDAO.addMoneyDAO(amt, wId, uId, date);
 	}
 	
 	@Override
-	public void transferMoney(int amt, int sw_id, int dw_id,int r_id, int u_id, Date date) {
-		System.out.println(walletMoneyImplDAO.TransferMoney(amt, sw_id, dw_id,r_id, u_id, date));
+	public void transferMoney(int amt, int swId, int dwId,int rId, int uId, Date date) {
+		walletMoneyImplDAO.transferMoneyDAO(amt, swId, dwId,rId, uId, date);
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see com.accolite.carpooling.services.interfaces.WalletService#getMoney(int)
+	 */
 	@Override
-	public int getMoney(int w_id) {
-		return walletMoneyImplDAO.GetMoney(w_id);
+	public int getMoney(int wId) {
+		return walletMoneyImplDAO.getMoneyDAO(wId);
 	}
 
 }

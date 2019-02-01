@@ -6,14 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.accolite.carpooling.dto.InvoiceDTO;
 import com.accolite.carpooling.dto.PassWordRecoveryDTO;
-import com.accolite.carpooling.dto.RatingDto;
 import com.accolite.carpooling.models.RatingInsertion;
 import com.accolite.carpooling.models.WalletMoney;
 import com.accolite.carpooling.services.interfaces.EmailService;
@@ -33,16 +31,15 @@ public class WalletController {
 	/*
 	 *  Calling Email Service for sending an email to reset password 
 	 */
-	@RequestMapping(value="/passwordrecovery", method=RequestMethod.POST)
+	@PostMapping("/passwordrecovery")
 	public void passwordRecovery(@RequestBody PassWordRecoveryDTO passwordRecovery) {
-		System.out.println(passwordRecovery.getTo_mail());
-		emailService.passwordRecovery(passwordRecovery.getTo_mail(), passwordRecovery.getSubject(), passwordRecovery.getText(), passwordRecovery.getLink());
+		emailService.passwordRecovery(passwordRecovery.getToMail(), passwordRecovery.getSubject(), passwordRecovery.getText(), passwordRecovery.getLink());
 	}
 	
 	/*
 	 * Calling Ride Service for sending an email to accept or reject the ride
 	 */
-	@RequestMapping(value="/rideRequest", method=RequestMethod.GET)
+	@PostMapping("/rideRequest")
 	public void rideRequest() {
 		emailService.rideRequest("dileep.matha98@gmail.com", "subject", "text", "link");
 	}
@@ -50,44 +47,43 @@ public class WalletController {
 	/*
 	 *  Calling the Email Service for sending the invoice of his transactions to the user
 	 */
-	@RequestMapping(value="/invoice", method=RequestMethod.GET)
-	public void invoice() {
-		emailService.invoice("dileep.matha98@gmail.com", "Inovice", "Invoice for your Trips in CarPooling");
+	@PostMapping("/invoice")
+	public void invoice(@RequestBody InvoiceDTO invoiceDTO) {
+		emailService.invoice(invoiceDTO.getSendTo(), invoiceDTO.getSubject(), invoiceDTO.getText(), invoiceDTO.getuId());
 	}
 	
 	/*
 	 *  Calling the Wallet service for adding money into the wallet 
 	 */
-	@RequestMapping(value="/addmoney", method=RequestMethod.POST)
-	public ResponseEntity<?> addmoney(@RequestBody WalletMoney walletmoney) { 
+	@PostMapping("/addmoney")
+	public ResponseEntity<Integer> addmoney(@RequestBody WalletMoney walletmoney) { 
 	    Date date = new Date(); 
-		Integer amt = walletService.addMoney(walletmoney.getAmt(), walletmoney.getW_id(), 1, date);
-		return new ResponseEntity<Integer>(amt, HttpStatus.OK);
+		Integer amt = walletService.addMoney(walletmoney.getAmt(), walletmoney.getWId(), 1, date);
+		return new ResponseEntity<>(amt, HttpStatus.OK);
 	}
 	
 	/*
 	 *  Calling the Wallet Service for getting the display the wallet balance
 	 */
-	@RequestMapping(value="/getmoney", method=RequestMethod.POST)
-	public ResponseEntity<?> getmoney(@RequestBody WalletMoney walletmoney) {
-		Integer amt = walletService.getMoney(walletmoney.getW_id());
-		return new ResponseEntity<Integer>(amt,HttpStatus.OK);
+	@PostMapping("/getmoney")
+	public ResponseEntity<Integer> getmoney(@RequestBody WalletMoney walletmoney) {
+		Integer amt = walletService.getMoney(walletmoney.getWId());
+		return new ResponseEntity<>(amt,HttpStatus.OK);
 		
 	}
 	
-	/*
-	@RequestMapping(value="/transfermoney", method=RequestMethod.GET)
+	@PostMapping("/transfermoney")
 	public void transfer() { 
 	    Date date = new Date(); 
 		walletService.transferMoney(11, 2, 1, 3, 1, date);
-	}*/
+	}
+	
 	
 	/*
 	 * Calling the rating service for rating the ride of the user
 	 */
-	@RequestMapping(value="/ratinguser", method=RequestMethod.POST)
+	@PostMapping("/ratinguser")
 	public void ratinguser(@RequestBody RatingInsertion ratingInsertion) {
-		System.out.println("rating" + ratingInsertion.getRating());
 		ratingFeedbackService.insertRatingUser(ratingInsertion.getU_id(), ratingInsertion.getRating(), ratingInsertion.getFeedback());
 	}
 }

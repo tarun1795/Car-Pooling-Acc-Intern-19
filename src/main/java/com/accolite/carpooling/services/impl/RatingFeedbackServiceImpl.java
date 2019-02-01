@@ -13,14 +13,18 @@ public class RatingFeedbackServiceImpl implements RatingFeedbackService {
 	RatingUserDAO ratingUserDAO;
 	
 	@Override
-	public int getRatingUser(int u_id) {
-		return ratingUserDAO.getRating(u_id);
+	public int getRatingUser(int uId) {
+		return ratingUserDAO.getRating(uId);
 	}
 	
+	/*
+	 * (non-Javadoc)
+	 * @see com.accolite.carpooling.services.interfaces.RatingFeedbackService#insertRatingUser(int, int, java.lang.String)
+	 */
+	
 	@Override
-	public void insertRatingUser(int u_id, int rating, String feedback) {
-		boolean a = ratingUserDAO.insertRatingFeedback(u_id, rating, feedback);
-		System.out.println(a);
+	public void insertRatingUser(int uId, int rating, String feedback) {
+		ratingUserDAO.insertRatingFeedback(uId, rating, feedback);
 	}
 
 }

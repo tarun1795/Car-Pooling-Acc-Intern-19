@@ -48,6 +48,7 @@ public class WalletHistory {
 		this.status = status;
 	}
 	
+	@Override
 	public String toString() {
 		return "[ t_id = " + transaction_id + ", u_id =" + u_id + ", r_id = " + r_id + "amount = " + amount + ", transaction_date = "+transaction_date+"status = " + status + " ]";
 	}

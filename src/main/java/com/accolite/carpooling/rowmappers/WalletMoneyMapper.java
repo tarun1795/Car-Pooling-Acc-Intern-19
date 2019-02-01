@@ -9,11 +9,12 @@ import com.accolite.carpooling.models.WalletMoney;
 
 public class WalletMoneyMapper implements RowMapper<WalletMoney> {
 
+	@Override
 	public WalletMoney mapRow(ResultSet resultSet, int i) throws SQLException {
 
 		WalletMoney wm = new WalletMoney();
 		wm.setAmt(resultSet.getInt("amount"));
-		wm.setW_id(resultSet.getInt("w_id"));
+		wm.setWId(resultSet.getInt("w_id"));
 		return wm;
 		
 	}

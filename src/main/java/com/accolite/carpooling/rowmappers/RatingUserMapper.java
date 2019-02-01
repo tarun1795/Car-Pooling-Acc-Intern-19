@@ -9,6 +9,7 @@ import com.accolite.carpooling.models.RatingUser;
 
 public class RatingUserMapper implements RowMapper<RatingUser> {
 
+	@Override
 	public RatingUser mapRow(ResultSet resultSet, int i) throws SQLException {
 		RatingUser rs = new RatingUser();
 		rs.setRating(resultSet.getInt("avg_rating"));

@@ -4,7 +4,7 @@ import java.util.Date;
 
 public interface WalletService {
 
-	public int addMoney(int amt, int w_id, int u_id, Date date);
-	public void transferMoney(int amt, int sw_id, int dw_id, int r_id, int u_id, Date time);
-	public int getMoney(int w_id);
+	public int addMoney(int amt, int wId, int uId, Date date);
+	public void transferMoney(int amt, int swId, int dwId, int rId, int uId, Date time);
+	public int getMoney(int wId);
 }
